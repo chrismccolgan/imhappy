@@ -40,6 +40,7 @@ CREATE TABLE [Entry] (
   [CategoryId] INTEGER NOT NULL,
   [UserProfileId] INTEGER NOT NULL,
   [IsDeleted] BIT NOT NULL DEFAULT 0,
+  [IsSignificant] BIT NOT NULL DEFAULT 0,
 
   CONSTRAINT [FK_Entry_Category] FOREIGN KEY ([CategoryId]) REFERENCES [Category] ([Id]),
   CONSTRAINT [FK_Entry_UserProfile] FOREIGN KEY ([UserProfileId]) REFERENCES [UserProfile] ([Id])
@@ -68,8 +69,8 @@ SET IDENTITY_INSERT [Category] OFF
 
 SET IDENTITY_INSERT [Entry] ON
 INSERT INTO [Entry] 
-  ([Id], [Title], [Date], [Entry], [CategoryId], [UserProfileId], [IsDeleted])
+  ([Id], [Title], [Date], [Entry], [CategoryId], [UserProfileId], [IsDeleted], [IsSignificant])
 VALUES 
-  (1, 'Test', '2020-05-28', 'This is a test entry.', 1, 1, 0), 
-  (2, 'Test2', '2020-12-28', 'This is a test entry 2.', 5, 2, 0); 
+  (1, 'Test', '2020-05-28', 'This is a test entry.', 1, 1, 0, 0), 
+  (2, 'Test2', '2020-12-28', 'This is a test entry 2.', 5, 2, 0, 0); 
 SET IDENTITY_INSERT [Entry] OFF
