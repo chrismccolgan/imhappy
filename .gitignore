@@ -25,6 +25,7 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+.eslintcache
 *\:Zone.Identifier\:\$DATA
 
 # User-specific files
