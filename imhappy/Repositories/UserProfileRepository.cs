@@ -20,6 +20,7 @@ namespace imhappy.Repositories
                                          WHERE FirebaseUserId = @FirebaseuserId";
                     DbUtils.AddParameter(cmd, "@FirebaseUserId", firebaseUserId);
                     UserProfile userProfile = null;
+
                     var reader = cmd.ExecuteReader();
                     if (reader.Read())
                     {
@@ -35,6 +36,7 @@ namespace imhappy.Repositories
                         };
                     }
                     reader.Close();
+
                     return userProfile;
                 }
             }
@@ -50,12 +52,14 @@ namespace imhappy.Repositories
                     cmd.CommandText = @"INSERT INTO UserProfile (FirebaseUserId, FirstName, LastName, Email, Birthday, CreateDateTime)
                                         OUTPUT INSERTED.ID
                                         VALUES (@FirebaseUserId, @FirstName, @LastName, @Email, @Birthday, @CreateDateTime)";
+
                     DbUtils.AddParameter(cmd, "@FirebaseUserId", userProfile.FirebaseUserId);
                     DbUtils.AddParameter(cmd, "@FirstName", userProfile.FirstName);
                     DbUtils.AddParameter(cmd, "@LastName", userProfile.LastName);
                     DbUtils.AddParameter(cmd, "@Email", userProfile.Email);
                     DbUtils.AddParameter(cmd, "@Birthday", userProfile.Birthday);
                     DbUtils.AddParameter(cmd, "@CreateDateTime", userProfile.CreateDateTime);
+
                     userProfile.Id = (int)cmd.ExecuteScalar();
                 }
             }

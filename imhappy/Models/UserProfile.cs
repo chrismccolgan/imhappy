@@ -7,7 +7,6 @@ namespace imhappy.Models
     {
         public int Id { get; set; }
 
-        [Required]
         [StringLength(28, MinimumLength = 28)]
         public string FirebaseUserId { get; set; }
 
@@ -23,7 +22,6 @@ namespace imhappy.Models
         [Required]
         public DateTime Birthday { get; set; }
 
-        [Required]
         public DateTime CreateDateTime { get; set; }
     }
 }
