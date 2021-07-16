@@ -32,18 +32,18 @@ CREATE TABLE [Category] (
   [Emoji] NVARCHAR(10)
 )
 
-CREATE TABLE [Entry] (
+CREATE TABLE [Moment] (
   [Id] INTEGER IDENTITY PRIMARY KEY NOT NULL,
   [Title] NVARCHAR(100) NOT NULL,
   [Date] DATETIME NOT NULL,
   [Entry] NVARCHAR(MAX) NOT NULL,
-  [CategoryId] INTEGER NOT NULL,
+  [CategoryId] INTEGER NOT NULL DEFAULT 1,
   [UserProfileId] INTEGER NOT NULL,
   [IsDeleted] BIT NOT NULL DEFAULT 0,
   [IsSignificant] BIT NOT NULL DEFAULT 0,
 
-  CONSTRAINT [FK_Entry_Category] FOREIGN KEY ([CategoryId]) REFERENCES [Category] ([Id]),
-  CONSTRAINT [FK_Entry_UserProfile] FOREIGN KEY ([UserProfileId]) REFERENCES [UserProfile] ([Id])
+  CONSTRAINT [FK_Moment_Category] FOREIGN KEY ([CategoryId]) REFERENCES [Category] ([Id]),
+  CONSTRAINT [FK_Moment_UserProfile] FOREIGN KEY ([UserProfileId]) REFERENCES [UserProfile] ([Id])
 )
 GO
 
@@ -59,18 +59,19 @@ SET IDENTITY_INSERT [Category] ON
 INSERT INTO [Category]
   ([Id], [Name], [Emoji])
 VALUES 
-  (1, 'Happy', N'😊'),
-  (2, 'Heart', N'💖'),
-  (3, 'Birthday cake', N'🎂'),
-  (4, 'Lucky', N'🍀'),
-  (5, 'Trophy', N'🏆'),
-  (6, 'Dog', N'🐶');
+  (1, 'Uncategorized', N'😊'),
+  (2, 'Happy', N'😊'),
+  (3, 'Heart', N'💖'),
+  (4, 'Birthday cake', N'🎂'),
+  (5, 'Lucky', N'🍀'),
+  (6, 'Trophy', N'🏆'),
+  (7, 'Dog', N'🐶');
 SET IDENTITY_INSERT [Category] OFF
 
-SET IDENTITY_INSERT [Entry] ON
-INSERT INTO [Entry] 
+SET IDENTITY_INSERT [Moment] ON
+INSERT INTO [Moment] 
   ([Id], [Title], [Date], [Entry], [CategoryId], [UserProfileId], [IsDeleted], [IsSignificant])
 VALUES 
   (1, 'Test', '2020-05-28', 'This is a test entry.', 1, 1, 0, 0), 
   (2, 'Test2', '2020-12-28', 'This is a test entry 2.', 5, 2, 0, 0); 
-SET IDENTITY_INSERT [Entry] OFF
+SET IDENTITY_INSERT [Moment] OFF
