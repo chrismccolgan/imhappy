@@ -7,6 +7,7 @@ namespace imhappy.Models
     {
         public int Id { get; set; }
 
+        [Required]
         [StringLength(28, MinimumLength = 28)]
         public string FirebaseUserId { get; set; }
 

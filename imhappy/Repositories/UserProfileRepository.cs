@@ -1,6 +1,6 @@
-﻿using Microsoft.Extensions.Configuration;
-using imhappy.Models;
+﻿using imhappy.Models;
 using imhappy.Utils;
+using Microsoft.Extensions.Configuration;
 
 namespace imhappy.Repositories
 {
@@ -20,7 +20,6 @@ namespace imhappy.Repositories
                                          WHERE FirebaseUserId = @FirebaseuserId";
                     DbUtils.AddParameter(cmd, "@FirebaseUserId", firebaseUserId);
                     UserProfile userProfile = null;
-
                     var reader = cmd.ExecuteReader();
                     if (reader.Read())
                     {
@@ -36,7 +35,6 @@ namespace imhappy.Repositories
                         };
                     }
                     reader.Close();
-
                     return userProfile;
                 }
             }
@@ -59,7 +57,6 @@ namespace imhappy.Repositories
                     DbUtils.AddParameter(cmd, "@Email", userProfile.Email);
                     DbUtils.AddParameter(cmd, "@Birthday", userProfile.Birthday);
                     DbUtils.AddParameter(cmd, "@CreateDateTime", userProfile.CreateDateTime);
-
                     userProfile.Id = (int)cmd.ExecuteScalar();
                 }
             }
