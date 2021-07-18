@@ -2,14 +2,14 @@ import React, { useState, useEffect, createContext } from 'react';
 import firebase from 'firebase/app';
 import 'firebase/auth';
 
+const apiUrl = '/api/userprofile';
+
 export const UserProfileContext = createContext();
 
-export function UserProfileProvider(props) {
-  const apiUrl = '/api/userprofile';
-
+export const UserProfileProvider = (props) => {
   const userProfile = sessionStorage.getItem('userProfile');
-  const [isLoggedIn, setIsLoggedIn] = useState(userProfile != null);
 
+  const [isLoggedIn, setIsLoggedIn] = useState(userProfile != null);
   const [isFirebaseReady, setIsFirebaseReady] = useState(false);
 
   useEffect(() => {
@@ -87,4 +87,4 @@ export function UserProfileProvider(props) {
       {isFirebaseReady ? props.children : 'Loading...'}
     </UserProfileContext.Provider>
   );
-}
+};

@@ -9,16 +9,16 @@ namespace imhappy.Controllers
     [ApiController]
     public class CategoryController : ControllerBase
     {
-        private readonly ICategoryRepository _momentRepository;
-        public CategoryController(ICategoryRepository momentRepository)
+        private readonly ICategoryRepository _categoryRepository;
+        public CategoryController(ICategoryRepository categoryRepository)
         {
-            _momentRepository = momentRepository;
+            _categoryRepository = categoryRepository;
         }
 
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok(_momentRepository.GetAll());
+            return Ok(_categoryRepository.GetAll());
         }
     }
 }

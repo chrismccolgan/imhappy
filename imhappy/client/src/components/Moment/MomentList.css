@@ -1,0 +1,66 @@
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td,
+th {
+  padding: 8px;
+  white-space: nowrap;
+}
+
+td.actions {
+  text-align: right;
+}
+
+.January {
+  background-color: #95042a;
+}
+
+.February {
+  background-color: #453a92;
+}
+
+.March {
+  background-color: #4893af;
+}
+
+.April {
+  background-color: #b9164d;
+}
+
+.May {
+  background-color: #178053;
+}
+
+.June {
+  background-color: #942a73;
+}
+
+.July {
+  background-color: #b1201c;
+}
+
+.August {
+  background-color: #758e29;
+}
+
+.September {
+  background-color: #185395;
+}
+
+.October {
+  background-color: #d04019;
+}
+
+.November {
+  background-color: #c49732;
+}
+
+.December {
+  background-color: #126fb0;
+}
+
+.significant {
+  font-size: xx-large;
+}

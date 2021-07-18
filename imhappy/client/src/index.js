@@ -1,11 +1,13 @@
+import firebase from 'firebase/app';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter } from 'react-router-dom';
+import reportWebVitals from './reportWebVitals';
 import './index.css';
 import App from './App';
-import reportWebVitals from './reportWebVitals';
-import firebase from 'firebase/app';
+import { CategoryProvider } from './components/Category/CategoryProvider';
+import { MomentProvider } from './components/Moment/MomentProvider';
 import { UserProfileProvider } from './components/UserProfile/UserProfileProvider';
-import { BrowserRouter } from 'react-router-dom';
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,
@@ -16,9 +18,13 @@ firebase.initializeApp(firebaseConfig);
 ReactDOM.render(
   <React.StrictMode>
     <UserProfileProvider>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
+      <CategoryProvider>
+        <MomentProvider>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </MomentProvider>
+      </CategoryProvider>
     </UserProfileProvider>
   </React.StrictMode>,
   document.getElementById('root')
