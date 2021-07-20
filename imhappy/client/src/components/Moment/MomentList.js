@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import MomentCard from './MomentCard';
 import { MomentContext } from './MomentProvider';
-import './MomentList.css';
+import classes from './MomentList.module.css';
 
 const MomentList = () => {
   const { moments, getAllMoments } = useContext(MomentContext);
@@ -16,15 +16,7 @@ const MomentList = () => {
   }
 
   return (
-    <table>
-      <thead>
-        <tr>
-          <th></th>
-          <th>Date</th>
-          <th>Entry</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
+    <table className={classes.table}>
       <tbody>
         {moments.map((moment) => (
           <MomentCard key={moment.id} moment={moment} />

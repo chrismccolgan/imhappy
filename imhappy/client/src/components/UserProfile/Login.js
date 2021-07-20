@@ -1,9 +1,9 @@
 import React, { useState, useContext } from 'react';
-// import { useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { UserProfileContext } from '../UserProfile/UserProfileProvider';
 
 const Login = () => {
-  // const history = useHistory();
+  const history = useHistory();
   const { login, logout, isLoggedIn } = useContext(UserProfileContext);
 
   const [email, setEmail] = useState();
@@ -12,7 +12,7 @@ const Login = () => {
   const handleLogin = (e) => {
     e.preventDefault();
     login(email, password)
-      .then(() => alert('Successful'))
+      .then(() => history.push('/'))
       .catch(() => alert('Invalid email or password'));
   };
 

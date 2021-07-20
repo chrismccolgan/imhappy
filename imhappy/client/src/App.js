@@ -1,12 +1,11 @@
-import './App.css';
-import AllMoments from './pages/AllMoments';
-import AuthPage from './pages/AuthPage';
+import NavBar from './components/Layout/NavBar';
+import ApplicationViews from './components/Layout/ApplicationViews';
 
 function App() {
   return (
     <>
-      <AuthPage />
-      <AllMoments />
+      <NavBar />
+      <ApplicationViews />
     </>
   );
 }

@@ -1,16 +1,37 @@
-table {
-  border-collapse: collapse;
-  width: 100%;
+.date {
+  font-weight: bold;
 }
 
-td,
-th {
-  padding: 8px;
-  white-space: nowrap;
+.emoji {
+  font-size: x-large;
 }
 
-td.actions {
+.actions {
   text-align: right;
+}
+
+.actions-button {
+  display: none;
+  vertical-align: middle;
+  line-height: 0;
+}
+
+tr:hover .actions-button {
+  display: inherit;
+}
+
+.actions-button:hover {
+  color: whitesmoke;
+  cursor: pointer;
+}
+
+tr td.entry {
+  width: 100%;
+  white-space: unset;
+}
+
+.significant .entry {
+  font-size: xxx-large;
 }
 
 .January {
@@ -59,8 +80,4 @@ td.actions {
 
 .December {
   background-color: #126fb0;
-}
-
-.significant {
-  font-size: xx-large;
 }

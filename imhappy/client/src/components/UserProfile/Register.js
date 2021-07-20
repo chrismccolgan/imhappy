@@ -1,6 +1,7 @@
 import React, { useReducer, useContext } from 'react';
-// import { useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { UserProfileContext } from './UserProfileProvider';
+import { MomentContext } from '../Moment/MomentProvider';
 
 const initState = {
   firstName: '',
@@ -20,8 +21,10 @@ const reducer = (prevState, action) => {
 };
 
 const Register = () => {
-  // const history = useHistory();
+  const history = useHistory();
+
   const { register } = useContext(UserProfileContext);
+  const { addMoment } = useContext(MomentContext);
 
   const [registerState, dispatch] = useReducer(reducer, initState);
 
@@ -49,12 +52,32 @@ const Register = () => {
       birthday: registerState.birthday,
     };
 
-    register(userProfile, registerState.password).then((user) =>
-      console.log(user)
-    );
+    register(userProfile, registerState.password)
+      .then((user) => {
+        const newMoment1 = {
+          entry: `Happy birthday, ${user.firstName}!`,
+          date: user.birthday,
+          isSignificant: true,
+          userProfileId: user.id,
+          categoryId: 4,
+        };
 
-    console.log(registerState);
-    dispatch({ isLoading: false });
+        const newMoment2 = {
+          entry: 'Joined IMHAPPY',
+          date: user.createDateTime,
+          isSignificant: false,
+          userProfileId: user.id,
+          categoryId: 2,
+        };
+
+        debugger;
+        addMoment(newMoment1);
+        addMoment(newMoment2);
+      })
+      .then(() => {
+        dispatch({ isLoading: false });
+        history.push('/');
+      });
   };
 
   return (

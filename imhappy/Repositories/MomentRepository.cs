@@ -16,7 +16,6 @@ namespace imhappy.Repositories
             {
                 return @"SELECT m.Id, 
                                 m.UserProfileId,
-                                m.Title, 
                                 m.Date, 
                                 m.Entry, 
                                 m.IsSignificant,
@@ -43,7 +42,6 @@ namespace imhappy.Repositories
             {
                 Id = DbUtils.GetInt(reader, "Id"),
                 UserProfileId = DbUtils.GetInt(reader, "UserProfileId"),
-                Title = DbUtils.GetString(reader, "Title"),
                 Date = DbUtils.GetDateTime(reader, "Date"),
                 Entry = DbUtils.GetString(reader, "Entry"),
                 IsSignificant = reader.GetBoolean(reader.GetOrdinal("IsSignificant")),
@@ -107,11 +105,10 @@ namespace imhappy.Repositories
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"INSERT INTO Moment (UserProfileId, Title, Date, Entry, CategoryId, IsSignificant, IsDeleted)
+                    cmd.CommandText = @"INSERT INTO Moment (UserProfileId, Date, Entry, CategoryId, IsSignificant, IsDeleted)
                                         OUTPUT INSERTED.ID
-                                        VALUES (@UserProfileId, @Title, @Date, @Entry, @CategoryId, @IsSignificant, @IsDeleted)";
+                                        VALUES (@UserProfileId, @Date, @Entry, @CategoryId, @IsSignificant, @IsDeleted)";
                     DbUtils.AddParameter(cmd, "@UserProfileId", moment.UserProfileId);
-                    DbUtils.AddParameter(cmd, "@Title", moment.Title);
                     DbUtils.AddParameter(cmd, "@Date", moment.Date);
                     DbUtils.AddParameter(cmd, "@Entry", moment.Entry);
                     DbUtils.AddParameter(cmd, "@CategoryId", moment.CategoryId);
@@ -130,17 +127,15 @@ namespace imhappy.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"UPDATE Moment
-                                           SET Title = @Title,
-                                               Date = @Date,
+                                           SET Date = @Date,
                                                Entry = @Entry,
                                                CategoryId = @CategoryId, 
                                                IsSignificant = @IsSignificant
                                          WHERE Id = @Id";
-                    DbUtils.AddParameter(cmd, "@Title", moment.Title);
                     DbUtils.AddParameter(cmd, "@Date", moment.Date);
                     DbUtils.AddParameter(cmd, "@Entry", moment.Entry);
                     DbUtils.AddParameter(cmd, "@CategoryId", moment.CategoryId);
-                    DbUtils.AddParameter(cmd, "@Id", moment.Id);
+                    DbUtils.AddParameter(cmd, "@IsSignificant", moment.IsSignificant);
                     cmd.ExecuteNonQuery();
                 }
             }

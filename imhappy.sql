@@ -34,7 +34,6 @@ CREATE TABLE [Category] (
 
 CREATE TABLE [Moment] (
   [Id] INTEGER IDENTITY PRIMARY KEY NOT NULL,
-  [Title] NVARCHAR(100) NOT NULL,
   [Date] DATETIME NOT NULL,
   [Entry] NVARCHAR(MAX) NOT NULL,
   [CategoryId] INTEGER NOT NULL DEFAULT 1,
@@ -70,8 +69,8 @@ SET IDENTITY_INSERT [Category] OFF
 
 SET IDENTITY_INSERT [Moment] ON
 INSERT INTO [Moment] 
-  ([Id], [Title], [Date], [Entry], [CategoryId], [UserProfileId], [IsDeleted], [IsSignificant])
+  ([Id], [Date], [Entry], [CategoryId], [UserProfileId], [IsDeleted], [IsSignificant])
 VALUES 
-  (1, 'Test', '2020-05-28', 'This is a test entry.', 1, 1, 0, 0), 
-  (2, 'Test2', '2020-12-28', 'This is a test entry 2.', 5, 2, 0, 0); 
+  (1, '2020-05-28', 'This is a test entry.', 1, 1, 0, 0), 
+  (2, '2020-12-28', 'This is a test entry 2.', 5, 2, 0, 0); 
 SET IDENTITY_INSERT [Moment] OFF

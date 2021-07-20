@@ -1,4 +1,5 @@
 import React from 'react';
+import classes from './MomentCard.module.css';
 
 const MomentCard = (props) => {
   let d = new Date(props.moment.date);
@@ -21,18 +22,18 @@ const MomentCard = (props) => {
   const year = d.getUTCFullYear();
   const dateString = `${month} ${day}, ${year}`;
 
-  let classString = `card ${month}`;
-  if (props.moment.isSignificant) {
-    classString += ' significant';
-  }
-
   return (
-    <tr className={classString}>
-      <td>{props.moment.category.emoji}</td>
-      <td>{dateString}</td>
-      <td style={{ width: '100%' }}>{props.moment.entry}</td>
-      <td className='actions'>
-        <button>Edit</button> <button>Delete</button>
+    <tr
+      className={`${classes[month]} ${
+        props.moment.isSignificant && classes.significant
+      }`}
+    >
+      <td className={classes.emoji}>{props.moment.category.emoji}</td>
+      <td className={classes.date}>{dateString}</td>
+      <td className={classes.entry}>{props.moment.entry}</td>
+      <td className={classes.actions}>
+        <i className={'material-icons ' + classes['actions-button']}>delete</i>
+        <i className={'material-icons ' + classes['actions-button']}>edit</i>
       </td>
     </tr>
   );
