@@ -1,7 +1,22 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { useHistory } from 'react-router';
 import classes from './MomentCard.module.css';
+import { MomentContext } from './MomentProvider';
 
 const MomentCard = (props) => {
+  const history = useHistory();
+  const { deleteMoment } = useContext(MomentContext);
+
+  const handleDelete = () => {
+    deleteMoment(props.moment.id).then(() => {
+      history.push('/');
+    });
+  };
+
+  const handleEdit = () => {
+    history.push(`/moments/edit/${props.moment.id}`);
+  };
+
   let d = new Date(props.moment.date);
   const m = [
     'January',
@@ -31,10 +46,23 @@ const MomentCard = (props) => {
       <td className={classes.emoji}>{props.moment.category.emoji}</td>
       <td className={classes.date}>{dateString}</td>
       <td className={classes.entry}>{props.moment.entry}</td>
-      <td className={classes.actions}>
-        <i className={'material-icons ' + classes['actions-button']}>delete</i>
-        <i className={'material-icons ' + classes['actions-button']}>edit</i>
-      </td>
+
+      {!props.moment.actionsDisabled && (
+        <td className={classes.actions}>
+          <i
+            className={'material-icons ' + classes['actions-button']}
+            onClick={handleEdit}
+          >
+            edit
+          </i>
+          <i
+            className={'material-icons ' + classes['actions-button']}
+            onClick={handleDelete}
+          >
+            delete
+          </i>
+        </td>
+      )}
     </tr>
   );
 };

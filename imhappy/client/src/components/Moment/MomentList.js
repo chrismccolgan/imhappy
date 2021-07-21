@@ -12,7 +12,20 @@ const MomentList = () => {
   }, []);
 
   if (!moments || moments.length === 0) {
-    return <p>No moments found!</p>;
+    const noMoments = {
+      entry: 'No moments found. Add one today!',
+      category: { emoji: '😀' },
+      date: new Date(),
+      isSignificant: false,
+      actionsDisabled: true,
+    };
+    return (
+      <table className={classes.table}>
+        <tbody>
+          <MomentCard moment={noMoments} />
+        </tbody>
+      </table>
+    );
   }
 
   return (

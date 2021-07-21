@@ -2,6 +2,8 @@ import React, { useReducer, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { UserProfileContext } from './UserProfileProvider';
 import { MomentContext } from '../Moment/MomentProvider';
+import reducer from '../shared/formReducer';
+import classes from '../shared/formStyle.module.css';
 
 const initState = {
   firstName: '',
@@ -11,13 +13,6 @@ const initState = {
   password: '',
   confirmPassword: '',
   isLoading: false,
-};
-
-const reducer = (prevState, action) => {
-  return {
-    ...prevState,
-    ...action,
-  };
 };
 
 const Register = () => {
@@ -34,7 +29,7 @@ const Register = () => {
     });
   };
 
-  const handleRegister = (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
     dispatch({ isLoading: true });
 
@@ -52,43 +47,41 @@ const Register = () => {
       birthday: registerState.birthday,
     };
 
-    register(userProfile, registerState.password)
-      .then((user) => {
-        const newMoment1 = {
-          entry: `Happy birthday, ${user.firstName}!`,
-          date: user.birthday,
-          isSignificant: true,
-          userProfileId: user.id,
-          categoryId: 4,
-        };
+    const user = await register(userProfile, registerState.password);
 
-        const newMoment2 = {
-          entry: 'Joined IMHAPPY',
-          date: user.createDateTime,
-          isSignificant: false,
-          userProfileId: user.id,
-          categoryId: 2,
-        };
+    const newMoment1 = {
+      entry: `Happy birthday, ${user.firstName}!`,
+      date: user.birthday,
+      isSignificant: true,
+      userProfileId: user.id,
+      categoryId: 4,
+    };
 
-        debugger;
-        addMoment(newMoment1);
-        addMoment(newMoment2);
-      })
-      .then(() => {
-        dispatch({ isLoading: false });
-        history.push('/');
-      });
+    const newMoment2 = {
+      entry: 'Joined IMHAPPY',
+      date: user.createDateTime,
+      isSignificant: false,
+      userProfileId: user.id,
+      categoryId: 2,
+    };
+
+    await addMoment(newMoment1);
+    await addMoment(newMoment2);
+
+    dispatch({ isLoading: false });
+    history.push('/');
   };
 
   return (
-    <form onSubmit={handleRegister}>
-      <fieldset>
+    <div className={classes['form-control']}>
+      <form onSubmit={handleRegister}>
         <label htmlFor='registerFirstName'>First Name</label>
         <input
           id='registerFirstName'
           name='firstName'
           type='text'
           onChange={handleInputChange}
+          required
         />
 
         <label htmlFor='registerLastName'>Last Name</label>
@@ -97,14 +90,7 @@ const Register = () => {
           name='lastName'
           type='text'
           onChange={handleInputChange}
-        />
-
-        <label htmlFor='registerEmail'>Email</label>
-        <input
-          id='registerEmail'
-          name='email'
-          type='text'
-          onChange={handleInputChange}
+          required
         />
 
         <label htmlFor='registerBirthday'>Birthday</label>
@@ -113,6 +99,16 @@ const Register = () => {
           name='birthday'
           type='date'
           onChange={handleInputChange}
+          required
+        />
+
+        <label htmlFor='registerEmail'>Email</label>
+        <input
+          id='registerEmail'
+          name='email'
+          type='text'
+          onChange={handleInputChange}
+          required
         />
 
         <label htmlFor='registerPassword'>Password</label>
@@ -121,6 +117,7 @@ const Register = () => {
           name='password'
           type='password'
           onChange={handleInputChange}
+          required
         />
 
         <label htmlFor='registerConfirmPassword'>Confirm Password</label>
@@ -129,13 +126,14 @@ const Register = () => {
           name='confirmPassword'
           type='password'
           onChange={handleInputChange}
+          required
         />
 
         <button disabled={registerState.isLoading} type='submit'>
           Register
         </button>
-      </fieldset>
-    </form>
+      </form>
+    </div>
   );
 };
 

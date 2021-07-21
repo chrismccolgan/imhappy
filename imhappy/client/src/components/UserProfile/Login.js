@@ -1,10 +1,11 @@
 import React, { useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { UserProfileContext } from '../UserProfile/UserProfileProvider';
+import classes from '../shared/formStyle.module.css';
 
 const Login = () => {
   const history = useHistory();
-  const { login, logout, isLoggedIn } = useContext(UserProfileContext);
+  const { login } = useContext(UserProfileContext);
 
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
@@ -17,31 +18,27 @@ const Login = () => {
   };
 
   return (
-    <>
+    <div className={classes['form-control']}>
       <form onSubmit={handleLogin}>
-        <fieldset>
-          <label htmlFor='email'>Email</label>
-          <input
-            id='email'
-            type='text'
-            onChange={(e) => setEmail(e.target.value)}
-          />
+        <label htmlFor='email'>Email</label>
+        <input
+          id='email'
+          type='text'
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
 
-          <label htmlFor='password'>Password</label>
-          <input
-            id='password'
-            type='password'
-            onChange={(e) => setPassword(e.target.value)}
-          />
+        <label htmlFor='password'>Password</label>
+        <input
+          id='password'
+          type='password'
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
 
-          <button type='submit'>Login</button>
-        </fieldset>
+        <button type='submit'>Login</button>
       </form>
-
-      <button onClick={logout}>Logout</button>
-
-      <p>{`Is logged in? ${isLoggedIn}`}</p>
-    </>
+    </div>
   );
 };
 

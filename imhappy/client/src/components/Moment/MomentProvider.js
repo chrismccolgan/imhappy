@@ -19,9 +19,9 @@ export const MomentProvider = (props) => {
       },
     });
 
-    // if (!response.ok) {
-    //   throw new Error('Fetching moments failed');
-    // }
+    if (!response.ok) {
+      throw new Error('Fetching moments failed');
+    }
 
     const data = await response.json();
     setMoments(data);
@@ -37,9 +37,9 @@ export const MomentProvider = (props) => {
       },
     });
 
-    // if (!response.ok) {
-    //   throw new Error('Fetching moment failed');
-    // }
+    if (!response.ok) {
+      throw new Error('Fetching moment failed');
+    }
 
     const data = await response.json();
     return data;
@@ -93,6 +93,8 @@ export const MomentProvider = (props) => {
     if (!response.ok) {
       throw new Error('Deleting moment failed');
     }
+
+    getAllMoments();
   };
 
   return (

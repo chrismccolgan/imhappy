@@ -19,11 +19,11 @@ const ApplicationViews = () => {
         {isLoggedIn ? <MomentList /> : <Redirect to='/login' />}
       </Route>
 
-      <Route exact path='/moments/add'>
+      <Route exact path='/moments/new'>
         {isLoggedIn ? <MomentForm /> : <Redirect to='/login' />}
       </Route>
 
-      <Route exact path='/moments/edit/:entryId(\d+)'>
+      <Route exact path='/moments/edit/:momentId(\d+)'>
         {isLoggedIn ? <MomentForm /> : <Redirect to='/login' />}
       </Route>
 

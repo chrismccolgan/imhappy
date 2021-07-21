@@ -136,6 +136,7 @@ namespace imhappy.Repositories
                     DbUtils.AddParameter(cmd, "@Entry", moment.Entry);
                     DbUtils.AddParameter(cmd, "@CategoryId", moment.CategoryId);
                     DbUtils.AddParameter(cmd, "@IsSignificant", moment.IsSignificant);
+                    DbUtils.AddParameter(cmd, "@Id", moment.Id);
                     cmd.ExecuteNonQuery();
                 }
             }
