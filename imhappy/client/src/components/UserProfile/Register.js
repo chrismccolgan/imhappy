@@ -2,7 +2,7 @@ import React, { useReducer, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { UserProfileContext } from './UserProfileProvider';
 import { MomentContext } from '../Moment/MomentProvider';
-import reducer from '../shared/formReducer';
+import formReducer from '../shared/formReducer';
 import classes from '../shared/formStyle.module.css';
 
 const initState = {
@@ -21,7 +21,7 @@ const Register = () => {
   const { register } = useContext(UserProfileContext);
   const { addMoment } = useContext(MomentContext);
 
-  const [registerState, dispatch] = useReducer(reducer, initState);
+  const [registerState, dispatch] = useReducer(formReducer, initState);
 
   const handleInputChange = (event) => {
     dispatch({

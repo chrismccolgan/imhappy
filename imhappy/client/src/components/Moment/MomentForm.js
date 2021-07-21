@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useReducer } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { MomentContext } from '../Moment/MomentProvider';
 import { StickerContext } from '../Sticker/StickerProvider';
-import reducer from '../shared/formReducer';
+import formReducer from '../shared/formReducer';
 import classes from '../shared/formStyle.module.css';
 
 const initState = {
@@ -17,7 +17,7 @@ const MomentForm = () => {
   const { addMoment, getMoment, updateMoment } = useContext(MomentContext);
   const { stickers, getAllStickers } = useContext(StickerContext);
 
-  const [momentState, dispatch] = useReducer(reducer, initState);
+  const [momentState, dispatch] = useReducer(formReducer, initState);
 
   // Grabs the parameter passed on the URL
   const { momentId } = useParams();

@@ -1,8 +1,8 @@
-const reducer = (prevState, action) => {
+const formReducer = (prevState, action) => {
   return {
     ...prevState,
     ...action,
   };
 };
 
-export default reducer;
+export default formReducer;
