@@ -11,5 +11,5 @@ Technologies used to create IMHAPPY include React, .NET, SQL, and Google Firebas
 
 ## Screenshots
 
-<img src="./imhappy/client/public/screenshot1.png" width=50% height=50%>
+<img src="./imhappy/client/public/screenshot.png" width=50% height=50%>
 <img src="./imhappy/client/public/screenshot2.png" width=50% height=50%>
