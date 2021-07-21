@@ -24,7 +24,7 @@ namespace imhappy
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddTransient<IUserProfileRepository, UserProfileRepository>();
-            services.AddTransient<ICategoryRepository, CategoryRepository>();
+            services.AddTransient<IStickerRepository, StickerRepository>();
             services.AddTransient<IMomentRepository, MomentRepository>();
 
             var firebaseProjectId = Configuration.GetValue<string>("FirebaseProjectId");

@@ -13,9 +13,9 @@ namespace imhappy.Models
         [Required]
         public string Entry { get; set; }
 
-        public int CategoryId { get; set; }
+        public int StickerId { get; set; }
 
-        public Category Category { get; set; }
+        public Sticker Sticker { get; set; }
 
         public bool IsDeleted { get; set; }
 

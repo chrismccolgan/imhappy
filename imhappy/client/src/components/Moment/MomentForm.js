@@ -1,13 +1,13 @@
 import React, { useContext, useEffect, useReducer } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { MomentContext } from '../Moment/MomentProvider';
-import { CategoryContext } from '../Category/CategoryProvider';
+import { StickerContext } from '../Sticker/StickerProvider';
 import reducer from '../shared/formReducer';
 import classes from '../shared/formStyle.module.css';
 
 const initState = {
   date: '',
-  categoryId: '',
+  stickerId: '',
   entry: '',
   isSignificant: false,
   isLoading: false,
@@ -15,7 +15,7 @@ const initState = {
 
 const MomentForm = () => {
   const { addMoment, getMoment, updateMoment } = useContext(MomentContext);
-  const { categories, getAllCategories } = useContext(CategoryContext);
+  const { stickers, getAllStickers } = useContext(StickerContext);
 
   const [momentState, dispatch] = useReducer(reducer, initState);
 
@@ -49,7 +49,7 @@ const MomentForm = () => {
   };
 
   useEffect(() => {
-    getAllCategories().then(() => {
+    getAllStickers().then(() => {
       if (momentId) {
         getMoment(momentId).then((moment) => dispatch(moment));
       }
@@ -70,17 +70,17 @@ const MomentForm = () => {
           required
         />
 
-        <label htmlFor='momentCategoryId'>Category</label>
+        <label htmlFor='momentStickerId'>Sticker</label>
         <select
-          id='momentCategoryId'
-          name='categoryId'
+          id='momentStickerId'
+          name='stickerId'
           onChange={handleInputChange}
-          value={momentState.categoryId}
+          value={momentState.stickerId}
         >
-          <option value=''>Select Category</option>
-          {categories.map((category) => (
-            <option key={category.id} value={category.id}>
-              {category.emoji} {category.name}
+          <option value=''>Select Sticker</option>
+          {stickers.map((sticker) => (
+            <option key={sticker.id} value={sticker.id}>
+              {sticker.emoji} {sticker.name}
             </option>
           ))}
         </select>

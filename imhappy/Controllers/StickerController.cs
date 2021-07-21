@@ -7,18 +7,18 @@ namespace imhappy.Controllers
     [Authorize]
     [Route("api/[controller]")]
     [ApiController]
-    public class CategoryController : ControllerBase
+    public class StickerController : ControllerBase
     {
-        private readonly ICategoryRepository _categoryRepository;
-        public CategoryController(ICategoryRepository categoryRepository)
+        private readonly IStickerRepository _stickerRepository;
+        public StickerController(IStickerRepository stickerRepository)
         {
-            _categoryRepository = categoryRepository;
+            _stickerRepository = stickerRepository;
         }
 
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok(_categoryRepository.GetAll());
+            return Ok(_stickerRepository.GetAll());
         }
     }
 }

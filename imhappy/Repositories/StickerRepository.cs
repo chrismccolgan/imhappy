@@ -5,10 +5,10 @@ using System.Collections.Generic;
 
 namespace imhappy.Repositories
 {
-    public class CategoryRepository : BaseRepository, ICategoryRepository
+    public class StickerRepository : BaseRepository, IStickerRepository
     {
-        public CategoryRepository(IConfiguration config) : base(config) { }
-        public List<Category> GetAll()
+        public StickerRepository(IConfiguration config) : base(config) { }
+        public List<Sticker> GetAll()
         {
             using (var conn = Connection)
             {
@@ -18,13 +18,13 @@ namespace imhappy.Repositories
                     cmd.CommandText = @"SELECT Id,
                                                Name,
                                                Emoji
-                                          FROM Category 
+                                          FROM Sticker 
                                       ORDER BY Name";
                     var reader = cmd.ExecuteReader();
-                    var categories = new List<Category>();
+                    var stickers = new List<Sticker>();
                     while (reader.Read())
                     {
-                        categories.Add(new Category()
+                        stickers.Add(new Sticker()
                         {
                             Id = DbUtils.GetInt(reader, "Id"),
                             Name = DbUtils.GetString(reader, "Name"),
@@ -32,7 +32,7 @@ namespace imhappy.Repositories
                         });
                     }
                     reader.Close();
-                    return categories;
+                    return stickers;
                 }
             }
         }

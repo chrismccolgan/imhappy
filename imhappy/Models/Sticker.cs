@@ -2,7 +2,7 @@
 
 namespace imhappy.Models
 {
-    public class Category
+    public class Sticker
     {
         public int Id { get; set; }
 

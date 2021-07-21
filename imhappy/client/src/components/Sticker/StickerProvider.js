@@ -1,16 +1,16 @@
 import React, { useState, createContext, useContext } from 'react';
 import { UserProfileContext } from '../UserProfile/UserProfileProvider';
 
-const apiUrl = '/api/category';
+const apiUrl = '/api/sticker';
 
-export const CategoryContext = createContext();
+export const StickerContext = createContext();
 
-export const CategoryProvider = (props) => {
+export const StickerProvider = (props) => {
   const { getToken } = useContext(UserProfileContext);
 
-  const [categories, setCategories] = useState([]);
+  const [stickers, setStickers] = useState([]);
 
-  const getAllCategories = () => {
+  const getAllStickers = () => {
     return getToken().then((token) =>
       fetch(apiUrl, {
         method: 'GET',
@@ -19,13 +19,13 @@ export const CategoryProvider = (props) => {
         },
       })
         .then((resp) => resp.json())
-        .then(setCategories)
+        .then(setStickers)
     );
   };
 
   return (
-    <CategoryContext.Provider value={{ categories, getAllCategories }}>
+    <StickerContext.Provider value={{ stickers, getAllStickers }}>
       {props.children}
-    </CategoryContext.Provider>
+    </StickerContext.Provider>
   );
 };

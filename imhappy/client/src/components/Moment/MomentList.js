@@ -13,8 +13,8 @@ const MomentList = () => {
 
   if (!moments || moments.length === 0) {
     const noMoments = {
-      entry: 'No moments found. Add one today!',
-      category: { emoji: '😀' },
+      entry: 'No moments found. Log a happy moment today!',
+      sticker: { emoji: '😀' },
       date: new Date(),
       isSignificant: false,
       actionsDisabled: true,

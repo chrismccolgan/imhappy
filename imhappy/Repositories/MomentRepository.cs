@@ -19,11 +19,11 @@ namespace imhappy.Repositories
                                 m.Date, 
                                 m.Entry, 
                                 m.IsSignificant,
-                                m.CategoryId,
-                                c.Name, 
-                                c.Emoji
+                                m.StickerId,
+                                s.Name, 
+                                s.Emoji
                            FROM Moment m
-                      LEFT JOIN Category c ON m.CategoryId = c.Id
+                      LEFT JOIN Sticker s ON m.StickerId = s.Id
                           WHERE m.IsDeleted = 0";
             }
         }
@@ -45,10 +45,10 @@ namespace imhappy.Repositories
                 Date = DbUtils.GetDateTime(reader, "Date"),
                 Entry = DbUtils.GetString(reader, "Entry"),
                 IsSignificant = reader.GetBoolean(reader.GetOrdinal("IsSignificant")),
-                CategoryId = DbUtils.GetInt(reader, "CategoryId"),
-                Category = new Category()
+                StickerId = DbUtils.GetInt(reader, "StickerId"),
+                Sticker = new Sticker()
                 {
-                    Id = DbUtils.GetInt(reader, "CategoryId"),
+                    Id = DbUtils.GetInt(reader, "StickerId"),
                     Name = DbUtils.GetString(reader, "Name"),
                     Emoji = DbUtils.GetString(reader, "Emoji")
                 }
@@ -105,13 +105,13 @@ namespace imhappy.Repositories
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"INSERT INTO Moment (UserProfileId, Date, Entry, CategoryId, IsSignificant, IsDeleted)
+                    cmd.CommandText = @"INSERT INTO Moment (UserProfileId, Date, Entry, StickerId, IsSignificant, IsDeleted)
                                         OUTPUT INSERTED.ID
-                                        VALUES (@UserProfileId, @Date, @Entry, @CategoryId, @IsSignificant, @IsDeleted)";
+                                        VALUES (@UserProfileId, @Date, @Entry, @StickerId, @IsSignificant, @IsDeleted)";
                     DbUtils.AddParameter(cmd, "@UserProfileId", moment.UserProfileId);
                     DbUtils.AddParameter(cmd, "@Date", moment.Date);
                     DbUtils.AddParameter(cmd, "@Entry", moment.Entry);
-                    DbUtils.AddParameter(cmd, "@CategoryId", moment.CategoryId);
+                    DbUtils.AddParameter(cmd, "@StickerId", moment.StickerId);
                     DbUtils.AddParameter(cmd, "@IsSignificant", moment.IsSignificant);
                     DbUtils.AddParameter(cmd, "@IsDeleted", moment.IsDeleted);
                     moment.Id = (int)cmd.ExecuteScalar();
@@ -129,12 +129,12 @@ namespace imhappy.Repositories
                     cmd.CommandText = @"UPDATE Moment
                                            SET Date = @Date,
                                                Entry = @Entry,
-                                               CategoryId = @CategoryId, 
+                                               StickerId = @StickerId, 
                                                IsSignificant = @IsSignificant
                                          WHERE Id = @Id";
                     DbUtils.AddParameter(cmd, "@Date", moment.Date);
                     DbUtils.AddParameter(cmd, "@Entry", moment.Entry);
-                    DbUtils.AddParameter(cmd, "@CategoryId", moment.CategoryId);
+                    DbUtils.AddParameter(cmd, "@StickerId", moment.StickerId);
                     DbUtils.AddParameter(cmd, "@IsSignificant", moment.IsSignificant);
                     DbUtils.AddParameter(cmd, "@Id", moment.Id);
                     cmd.ExecuteNonQuery();

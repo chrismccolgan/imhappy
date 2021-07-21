@@ -54,7 +54,7 @@ const Register = () => {
       date: user.birthday,
       isSignificant: true,
       userProfileId: user.id,
-      categoryId: 4,
+      stickerId: 4,
     };
 
     const newMoment2 = {
@@ -62,7 +62,7 @@ const Register = () => {
       date: user.createDateTime,
       isSignificant: false,
       userProfileId: user.id,
-      categoryId: 2,
+      stickerId: 9,
     };
 
     await addMoment(newMoment1);

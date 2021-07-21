@@ -5,7 +5,7 @@ import { BrowserRouter } from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
 import './index.css';
 import App from './App';
-import { CategoryProvider } from './components/Category/CategoryProvider';
+import { StickerProvider } from './components/Sticker/StickerProvider';
 import { MomentProvider } from './components/Moment/MomentProvider';
 import { UserProfileProvider } from './components/UserProfile/UserProfileProvider';
 
@@ -18,13 +18,13 @@ firebase.initializeApp(firebaseConfig);
 ReactDOM.render(
   <React.StrictMode>
     <UserProfileProvider>
-      <CategoryProvider>
+      <StickerProvider>
         <MomentProvider>
           <BrowserRouter>
             <App />
           </BrowserRouter>
         </MomentProvider>
-      </CategoryProvider>
+      </StickerProvider>
     </UserProfileProvider>
   </React.StrictMode>,
   document.getElementById('root')

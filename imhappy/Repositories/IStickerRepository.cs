@@ -3,8 +3,8 @@ using System.Collections.Generic;
 
 namespace imhappy.Repositories
 {
-    public interface ICategoryRepository
+    public interface IStickerRepository
     {
-        List<Category> GetAll();
+        List<Sticker> GetAll();
     }
 }

@@ -32,9 +32,9 @@ const MomentCard = (props) => {
     'November',
     'December',
   ];
-  const month = m[d.getUTCMonth()];
-  const day = d.getUTCDate();
-  const year = d.getUTCFullYear();
+  const month = m[d.getMonth()];
+  const day = d.getDate();
+  const year = d.getFullYear();
   const dateString = `${month} ${day}, ${year}`;
 
   return (
@@ -43,7 +43,7 @@ const MomentCard = (props) => {
         props.moment.isSignificant && classes.significant
       }`}
     >
-      <td className={classes.emoji}>{props.moment.category.emoji}</td>
+      <td className={classes.emoji}>{props.moment.sticker.emoji}</td>
       <td className={classes.date}>{dateString}</td>
       <td className={classes.entry}>{props.moment.entry}</td>
 
